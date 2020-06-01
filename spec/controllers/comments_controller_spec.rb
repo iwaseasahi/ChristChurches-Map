@@ -8,7 +8,7 @@ RSpec.describe CommentsController, type: :controller do
 
     it '@commentに要求されたコメントを割り当てること' do
       get :edit, params: { id: comment }, xhr: true
-      expect(assigns(:comment)).to eq(comment)
+      expect(assigns(:comment)).to eq comment
     end
 
     it ':editテンプレートを表示すること' do
@@ -32,7 +32,7 @@ RSpec.describe CommentsController, type: :controller do
 
       it '@churchに要求された教会を割り当てること' do
         post :create, params: { comment: attributes_for(:comment), church_id: comment.church_id }, xhr: true
-        expect(assigns(:church)).to eq(church)
+        expect(assigns(:church)).to eq church
       end
 
       it ':createテンプレートを表示すること' do
@@ -63,13 +63,13 @@ RSpec.describe CommentsController, type: :controller do
     context '有効な属性の場合' do
       it '要求された@commentを取得すること' do
         patch :update, params: { id: comment, comment: attributes_for(:comment) }, xhr: true
-        expect(assigns(:comment)).to eq(comment)
+        expect(assigns(:comment)).to eq comment
       end
 
       it 'commentの属性を変更すること' do
         patch :update, params: { id: comment, comment: attributes_for(:comment, comment: 'RSpecによるテスト') }, xhr: true
         comment.reload
-        expect(comment.comment).to eq('RSpecによるテスト')
+        expect(comment.comment).to eq 'RSpecによるテスト'
       end
 
       it ':updateテンプレートを表示すること' do
